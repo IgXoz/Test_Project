@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import UIKit
+
+class EmployeeViewController: ViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
