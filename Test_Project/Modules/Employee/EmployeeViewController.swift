@@ -10,40 +10,28 @@ import UIKit
 
 class EmployeeViewController: UITableViewController {
     
+    // Временные заглушки, чтобы сконфигурировать ячейку
+    private var employees: Welcome?
+    private var employee: [Employee] = []
+    
+    //Создадим tableView во весь экран
     let employeeTableView = UITableView.init(frame: .zero, style: .grouped)
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(EmployeeCell.self, forCellReuseIdentifier: "reuseIdentifier") // азрегистрировали кастомную ячейку
     }
-    
+    //Переопределим методы протоколов UITableViewDataSourse & UITableViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") as! EmployeeCell
-//        configureCell(cell: cell, for: indexPath)
+        cell.configure()//вызван метод-заглушка
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        10 // временное значение
     }
     
 }
-
-private func configure(cell: UITableViewCell, indexPath: IndexPath) {
-    
-//    employeeTableView.register(EmployeeCell.self, forCellReuseIdentifier: "employeeCell")
-    
-    
-    
-    
-//       if let cell = cell as? LineCell {
-//           cell.lineLabel.text = NumberFormatter.localizedString(from:
-//               NSNumber(value: indexPath.row + 1), number: .decimal)
-//           cell.textView.text = book?.text[indexPath.row]
-//       }
-   }
-
 
 
