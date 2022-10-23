@@ -15,13 +15,21 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     private var employees: Welcome?
     private var employee: [Employee] = []
     
+    //необходимы для конфигурации
+    var presenter = EmployeePresenterProtocol!
+    let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator()
+    
     //Создадим tableView во весь экран
     let employeeTableView = UITableView.init(frame: .zero, style: .grouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(EmployeeCell.self, forCellReuseIdentifier: "reuseIdentifier") // азрегистрировали кастомную ячейку
+        
+//        configurator.configure(with: self)
+//        presenter.configureView() //нужно реализовать метод
     }
+    
     //Переопределим методы протоколов UITableViewDataSourse & UITableViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") as! EmployeeCell
@@ -35,16 +43,9 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     
     
     
-    var presenter = EmployeePresenterProtocol!
-    let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator()
+   
     
-    
-    override func viewdidload() {
-        
-        super.viewdidload() 
-        configurator.configure(with: self)
-        presenter.configureView() //нужно реализовать метод
-    }
+
     
     
     

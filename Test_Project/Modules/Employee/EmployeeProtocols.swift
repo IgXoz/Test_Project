@@ -9,6 +9,10 @@ import Foundation
 
 protocol EmployeeViewProtocol: class {
     
+    // методы для заполнения лейблов во вью контроллере
+    func setNameTitle()
+    func setPhoneNumberTitle()
+    func setSkillsTitle()
     
     
     
@@ -32,10 +36,13 @@ protocol EmployeeViewProtocol: class {
 
 protocol EmployeePresenterProtocol: class {
     
+    //должен иметь router и методы, которые вызываются при нажатии на ячейку/кнопку
+    
     var router: EmployeeRouterProtocol! { set get } // 
-    func configureView() // метод инициалищирует и конфигурирует первоначальные данные для визуальных элементов во вьюконтроллере.
+    func configureView() // метод инициализирует и конфигурирует первоначальные
+    //данные для визуальных элементов во вьюконтроллере.
     
-    
+    func cellClicked() // вызывается при тапе на ячейку
     
     
     
@@ -90,10 +97,8 @@ protocol EmployeeRouterProtocol: class {
 
 protocol EmployeeConfiguratorProtocol: class {
     
-    
-    
-    
-    
-    
     func configure(with viewController: EmployeeViewController)
+    
+    //внутри этого метода конфигурируется модуль
+    
 }

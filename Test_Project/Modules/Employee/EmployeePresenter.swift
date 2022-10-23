@@ -9,6 +9,7 @@ import Foundation
 
 class EmployeePresenter: EmployeePresenterProtocol{
     
+    
     var router: EmployeeRouterProtocol!
     
     var rateText: String
