@@ -10,7 +10,7 @@ import UIKit
 
 class EmployeeViewController: UITableViewController {
     
-    // Временные заглушки, чтобы сконфигурировать ячейку
+    // Временные заглушки, чтобы сконфигурировать ячейку 
     private var employees: Welcome?
     private var employee: [Employee] = []
     

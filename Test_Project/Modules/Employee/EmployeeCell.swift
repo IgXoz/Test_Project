@@ -9,7 +9,7 @@ import UIKit
 
 final class EmployeeCell: UITableViewCell, ReusableIdentifier {
     
-    //Настроим лейблы
+    //Настроим лейблы 
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
