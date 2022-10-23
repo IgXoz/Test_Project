@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EmployeeCell: UITableViewCell {
+final class EmployeeCell: UITableViewCell, ReusableIdentifier {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
