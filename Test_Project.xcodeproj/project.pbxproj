@@ -22,6 +22,7 @@
 		783A9CF32901D88500927BA1 /* EmployeeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CF22901D88500927BA1 /* EmployeeService.swift */; };
 		783A9CF52901D89600927BA1 /* ServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CF42901D89600927BA1 /* ServerService.swift */; };
 		783A9CF72901D8A100927BA1 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CF62901D8A100927BA1 /* StorageService.swift */; };
+		78CA334A29058D4600916341 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CA334929058D4600916341 /* EmployeeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		783A9CF22901D88500927BA1 /* EmployeeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeService.swift; sourceTree = "<group>"; };
 		783A9CF42901D89600927BA1 /* ServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerService.swift; sourceTree = "<group>"; };
 		783A9CF62901D8A100927BA1 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		78CA334929058D4600916341 /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				783A9CE22901D6C500927BA1 /* EmployeeViewController.swift */,
+				78CA334929058D4600916341 /* EmployeeCell.swift */,
 				783A9CE42901D6D100927BA1 /* EmployeePresenter.swift */,
 				783A9CE62901D6DC00927BA1 /* EmployeeInteractor.swift */,
 				783A9CE82901D6EB00927BA1 /* EmployeeConfigurator.swift */,
@@ -205,6 +208,7 @@
 				783A9CE32901D6C500927BA1 /* EmployeeViewController.swift in Sources */,
 				783A9CF72901D8A100927BA1 /* StorageService.swift in Sources */,
 				783A9CE92901D6EB00927BA1 /* EmployeeConfigurator.swift in Sources */,
+				78CA334A29058D4600916341 /* EmployeeCell.swift in Sources */,
 				783A9CD12901C59000927BA1 /* ViewController.swift in Sources */,
 				783A9CCD2901C59000927BA1 /* AppDelegate.swift in Sources */,
 				783A9CEB2901D6F600927BA1 /* EmployeeRouter.swift in Sources */,
