@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import UIKit
 
+// this class is not required for one screen app
 class EmployeeRouter: EmployeeRouterProtocol {
     
     weak var viewController: EmployeeViewController!
@@ -15,12 +15,7 @@ class EmployeeRouter: EmployeeRouterProtocol {
     init(viewController: EmployeeViewController) {
         self.viewController = viewController
     }
-    
-    func showAboutScene() {
-//        viewController.performSegue(withIdentifier: viewController.selfToAboutSegueName, sender: nil)
-    }
-
-//    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // prepare here some data for destination viewController
-    }
 }
+    
+    
+ 

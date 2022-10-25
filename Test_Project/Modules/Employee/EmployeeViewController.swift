@@ -16,7 +16,7 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     private var employee: [Employee] = []
     
     //необходимы для конфигурации
-    var presenter = EmployeePresenterProtocol!
+    var presenter = EmployeePresenterProtocol! // из этого экземпляра будем вызывать все методы презентора
     let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator()
     
     //Создадим tableView во весь экран
@@ -27,7 +27,8 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
         tableView.register(EmployeeCell.self, forCellReuseIdentifier: "reuseIdentifier") // азрегистрировали кастомную ячейку
         
 //        configurator.configure(with: self)
-//        presenter.configureView() //нужно реализовать метод
+        presenter.configureView() //нужно реализовать метод
+//        self.presenter.
     }
     
     //Переопределим методы протоколов UITableViewDataSourse & UITableViewDelegate
@@ -40,70 +41,5 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         10 // временное значение
     }
-    
-    
-    
-   
-    
-
-    
-    
-    
-    
-    
-    
-    
-    func setInputValue(with value: String?) {
-        <#code#>
-    }
-    
-    func setOutputValue(with value: String?) {
-        <#code#>
-    }
-    
-    func setInputCurrencyShortName(with shortName: String) {
-        <#code#>
-    }
-    
-    func setOutputCurrencyShortName(with shortName: String) {
-        <#code#>
-    }
-    
-    func addDoneOnInputCurrencyKeyboard() {
-        <#code#>
-    }
-    
-    func showHUD() {
-        <#code#>
-    }
-    
-    func showLoadCurrenciesButton() {
-        <#code#>
-    }
-    
-    func hideHUD() {
-        <#code#>
-    }
-    
-    func showAlertView(with text: String) {
-        <#code#>
-    }
-    
-    func showPickerView() {
-        <#code#>
-    }
-    
-    func hidePickerView() {
-        <#code#>
-    }
-    
-    func hideKeyboard() {
-        <#code#>
-    }
-    
-    func setRateText(with rateText: String) {
-        <#code#>
-    }
-    
     
 }

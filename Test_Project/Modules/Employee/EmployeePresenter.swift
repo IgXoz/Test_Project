@@ -7,76 +7,33 @@
 
 import Foundation
 
-class EmployeePresenter: EmployeePresenterProtocol{
+class EmployeePresenter: EmployeePresenterProtocol {
     
     
-    var router: EmployeeRouterProtocol!
+    var router: EmployeeRouterProtocol! // из этого экземпляра будем вызывать все методы интерактора
     
-    var rateText: String
+    weak var view: EmployeeViewProtocol! // в этот экземпляр будем передавать всю инфу, которая нужна во вью
+    var interactor: EmployeeInteractorProtocol! // будем работать с интерактором
     
+   
+    required init(view: EmployeeViewProtocol) {
+        self.view = view
+    }
+    
+    // метод инициализирует и конфигурирует первоначальные данные для вищуальных жлементов во вьюконтроллере
     func configureView() {
-        <#code#>
+        print("configureView")
     }
     
-    func textFieldDidBeginEditing() {
-        <#code#>
+    func viewDidBeginLoadingPresenter() {
+        print("viewDidBeginLoadingPresenter")
+        }
+    
+    func viewRefreshDataPresenter() {
+        print("viewRefreshDataPresenter")
+        
     }
     
-    func inputValueChanged(to newInputValue: String) {
-        <#code#>
-    }
-    
-    func inputValueCleared() {
-        <#code#>
-    }
-    
-    func inputCurrencyButtonClicked() {
-        <#code#>
-    }
-    
-    func outputCurrencyButtonClicked() {
-        <#code#>
-    }
-    
-    func loadCurrenciesButtonClicked() {
-        <#code#>
-    }
-    
-    func infoButtonClicked() {
-        <#code#>
-    }
-    
-    func showHUD() {
-        <#code#>
-    }
-    
-    func showLoadCurrenciesButton() {
-        <#code#>
-    }
-    
-    func hideHUD() {
-        <#code#>
-    }
-    
-    func updateOutputValue() {
-        <#code#>
-    }
-    
-    func showAlertView(with text: String) {
-        <#code#>
-    }
-    
-    func inputCurrencyNameUpdated() {
-        <#code#>
-    }
-    
-    func outputCurrencyNameUpdated() {
-        <#code#>
-    }
-    
-    func updateRateText() {
-        <#code#>
-    }
     
     
 }

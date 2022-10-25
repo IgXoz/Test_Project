@@ -41,6 +41,7 @@ final class EmployeeCell: UITableViewCell, ReusableIdentifier {
                                                        phoneNumberLabel,
                                                        skillLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 10
         stackView.axis = .vertical
         return stackView
     }()

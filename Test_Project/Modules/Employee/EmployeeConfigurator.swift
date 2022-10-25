@@ -18,7 +18,10 @@ class EmployeeConfigurator: EmployeeConfiguratorProtocol {
         viewController.presenter = presenter
         presenter.interactor = interactor
         presenter.router = router
-        presenter.currencyPickerView = viewController.currencyPickerView
-        viewController.currencyPickerView.delegate = presenter
     }
+    
+    
+    //чтобы не получить утечку памяти презентер у вьюконтроллера указывается как strong, а вьюконтроллер у презентера как weak, интерактор у презентера указывается как weak и тд
+    // при закрытии viewController все жлементы уничтожаются, тк никто не может иметь сильную ссылку на вьюконтроллер
+    
 }

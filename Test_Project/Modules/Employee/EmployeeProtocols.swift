@@ -9,32 +9,11 @@ import Foundation
 
 protocol EmployeeViewProtocol: class {
     
-    // методы для заполнения лейблов во вью контроллере
-    func setNameTitle()
-    func setPhoneNumberTitle()
-    func setSkillsTitle()
+    // необходимо наполнить протокол
     
-    
-    
-    
-    
-    
-    func setInputValue(with value: String?)
-    func setOutputValue(with value: String?)
-//    func setInputCurrencyShortName(with shortName: String)
-//    func setOutputCurrencyShortName(with shortName: String)
-//    func addDoneOnInputCurrencyKeyboard()
-//    func showHUD()
-//    func showLoadCurrenciesButton()
-//    func hideHUD()
-//    func showAlertView(with text: String)
-//    func showPickerView()
-//    func hidePickerView()
-//    func hideKeyboard()
-//    func setRateText(with rateText: String)
 }
 
-protocol EmployeePresenterProtocol: class {
+protocol EmployeePresenterProtocol: class{
     
     //должен иметь router и методы, которые вызываются при нажатии на ячейку/кнопку
     
@@ -42,57 +21,18 @@ protocol EmployeePresenterProtocol: class {
     func configureView() // метод инициализирует и конфигурирует первоначальные
     //данные для визуальных элементов во вьюконтроллере.
     
-    func cellClicked() // вызывается при тапе на ячейку
+    func cellClicked() // вызывается при тапе на ячейку. мб этот метода и не нужен
     
-    
-    
-//    var rateText: String { get }
-    func textFieldDidBeginEditing()
-    func inputValueChanged(to newInputValue: String)
-    func inputValueCleared()
-//    func inputCurrencyButtonClicked()
-//    func outputCurrencyButtonClicked()
-//    func loadCurrenciesButtonClicked()
-//    func infoButtonClicked()
-//    func showHUD()
-//    func showLoadCurrenciesButton()
-//    func hideHUD()
-    func updateOutputValue()
-//    func showAlertView(with text: String)
-//    func inputCurrencyNameUpdated()
-//    func outputCurrencyNameUpdated()
-//    func updateRateText()
 }
 
 protocol EmployeeInteractorProtocol: class {
     
+    func loadDataInteractor()
     
+    func saveDataInteractor()
     
-    
-    
-    
-    var inputValue: Double { set get }
-    var outputValue: Double { get }
-//    var inputCurrencyShortName: String { get }
-//    var outputCurrencyShortName: String { get }
-//    var inputCurrencyIndex: Int { get }
-//    var outputCurrencyIndex: Int { get }
-//    var outputCurrencyRatio: Double { get }
-//    func getAllCurrencies()
-//    func getCurrencyNames() -> [String]
-//    func inputCurrencyChanging()
-//    func outputCurrencyChanging()
-//    func currencyChanged(selectedIndex: Int)
-}
-
-protocol EmployeeRouterProtocol: class {
-    
-    
-    
-    
-    
-    func showAboutScene()
-//    func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    func removeDataInteractor()
+      
 }
 
 protocol EmployeeConfiguratorProtocol: class {
@@ -101,4 +41,9 @@ protocol EmployeeConfiguratorProtocol: class {
     
     //внутри этого метода конфигурируется модуль
     
+}
+
+protocol EmployeeRouterProtocol: class {
+// this protocol is not required for one screen app.
+
 }
