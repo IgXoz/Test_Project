@@ -8,6 +8,10 @@
 import Foundation
 
 class EmployeePresenter: EmployeePresenterProtocol {
+    func cellClicked() {
+        print("cellClicked")
+    }
+    
     
     
     var router: EmployeeRouterProtocol! // из этого экземпляра будем вызывать все методы интерактора
@@ -21,8 +25,18 @@ class EmployeePresenter: EmployeePresenterProtocol {
     }
     
     // метод инициализирует и конфигурирует первоначальные данные для вищуальных жлементов во вьюконтроллере
-    func configureView() {
-        print("configureView")
+    func configureViewPresenter() {
+        print("configureViewPresenter")
+        interactor.loadDataInteractor()
+        
+        sendModel(interactor.employee)
+        
+        
+        interactor.saveDataInteractor()
+    }
+    
+    func sendModel(_ presenterEmployee: [Employee]) {
+        view.employee = presenterEmployee
     }
     
     func viewDidBeginLoadingPresenter() {

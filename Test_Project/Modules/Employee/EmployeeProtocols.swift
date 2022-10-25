@@ -8,7 +8,8 @@
 import Foundation
 
 protocol EmployeeViewProtocol: class {
-    
+    var employee: [Employee] { get set }
+    var employees: Welcome? { get set }
     // необходимо наполнить протокол
     
 }
@@ -18,7 +19,7 @@ protocol EmployeePresenterProtocol: class{
     //должен иметь router и методы, которые вызываются при нажатии на ячейку/кнопку
     
     var router: EmployeeRouterProtocol! { set get } // 
-    func configureView() // метод инициализирует и конфигурирует первоначальные
+    func configureViewPresenter() // метод инициализирует и конфигурирует первоначальные
     //данные для визуальных элементов во вьюконтроллере.
     
     func cellClicked() // вызывается при тапе на ячейку. мб этот метода и не нужен
@@ -26,6 +27,9 @@ protocol EmployeePresenterProtocol: class{
 }
 
 protocol EmployeeInteractorProtocol: class {
+    
+    var employee: [Employee] { get set }
+    var employees: Welcome? { get set }
     
     func loadDataInteractor()
     

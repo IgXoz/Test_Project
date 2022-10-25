@@ -9,6 +9,8 @@ import Foundation
 
 class EmployeeInteractor: EmployeeInteractorProtocol {
     
+    var employees: Welcome?
+    var employee: [Employee] = []
     
     weak var presenter: EmployeePresenterProtocol!
     
@@ -22,6 +24,10 @@ class EmployeeInteractor: EmployeeInteractorProtocol {
         
     func loadDataInteractor() {
         print("loadDataInteractor")
+        ServerService.loadData { employee in
+            self.employee = employee
+        }
+        print("sendModelInteractor")
     }
     
     func saveDataInteractor() {

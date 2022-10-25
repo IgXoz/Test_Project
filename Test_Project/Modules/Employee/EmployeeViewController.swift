@@ -12,11 +12,11 @@ import UIKit
 class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     
     // Временные заглушки, чтобы сконфигурировать ячейку 
-    private var employees: Welcome?
-    private var employee: [Employee] = []
+    var employees: Welcome?
+    var employee: [Employee] = []
     
     //необходимы для конфигурации
-    var presenter = EmployeePresenterProtocol! // из этого экземпляра будем вызывать все методы презентора
+    var presenter: EmployeePresenterProtocol! // из этого экземпляра будем вызывать все методы презентора
     let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator()
     
     //Создадим tableView во весь экран
@@ -26,20 +26,34 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
         super.viewDidLoad()
         tableView.register(EmployeeCell.self, forCellReuseIdentifier: "reuseIdentifier") // азрегистрировали кастомную ячейку
         
-//        configurator.configure(with: self)
-        presenter.configureView() //нужно реализовать метод
-//        self.presenter.
+        configurator.configure(with: self)
+        presenter.configureViewPresenter() //нужно реализовать метод
+        
     }
+    
     
     //Переопределим методы протоколов UITableViewDataSourse & UITableViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") as! EmployeeCell
-        cell.configure()//вызван метод-заглушка
+        cell.configure()
+        configureCell(cell: cell, for: indexPath) //вызван метод-заглушка
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10 // временное значение
+        employee.count
+    }
+
+    
+    private func configureCell(cell: EmployeeCell, for indexPath: IndexPath) {
+        let employee = employee[indexPath.row] // получили конкретный объект - персонаж
+        cell.nameLabel.text = "Name: \(employee.name)"
+        cell.phoneNumberLabel.text = "Phone Number: \(employee.phoneNumber)"
+        cell.skillLabel.text = "Skills: \(employee.skills.count)"
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+
+        tableView.reloadData()
+    }
 }
