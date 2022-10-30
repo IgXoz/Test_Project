@@ -8,13 +8,25 @@
 import Foundation
 
 class EmployeeInteractor: EmployeeInteractorProtocol {
+   
+    func loadDataInteractor(completion: @escaping ([Employee]) -> ()) {
+        print("loadDataInteractor")
+        serverService.loadData { employee in
+            self.interactorEmployee = employee
+            print("Employee in loadDataInteractor is \(self.interactorEmployee)")
+            print("EmployeeClosure in loadDataInteractor is \(employee)")
+        }
+        print("sendModelInteractor")
+        completion(self.interactorEmployee)
+    }
     
-    var employees: Welcome?
-    var employee: [Employee] = []
+    
+    var employees: Welcome? // s/b deleted
+    var interactorEmployee: [Employee] = [] // s/b deleted
     
     weak var presenter: EmployeePresenterProtocol!
     
-//    let serverService: ServerServiceProtocol = ServerService()
+    let serverService: ServerServiceProtocol = ServerService() 
     
     
     required init(presenter: EmployeePresenterProtocol) {
@@ -22,13 +34,16 @@ class EmployeeInteractor: EmployeeInteractorProtocol {
     }
     
         
-    func loadDataInteractor() {
-        print("loadDataInteractor")
-        ServerService.loadData { employee in
-            self.employee = employee
-        }
-        print("sendModelInteractor")
-    }
+//    func loadDataInteractor() -> ([Employee]) {
+//        print("loadDataInteractor")
+//        serverService.loadData { employee in
+//            self.interactorEmployee = employee
+//            print("Employee in loadDataInteractor is \(self.employee)")
+//            print("EmployeeClosure in loadDataInteractor is \(employee)")
+//        }
+//        print("sendModelInteractor")
+//        return interactorEmployee
+//    }
     
     func saveDataInteractor() {
         print("saveDataInteractor")

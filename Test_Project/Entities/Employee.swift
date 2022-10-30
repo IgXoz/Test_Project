@@ -23,6 +23,7 @@ struct Employee: Codable {
     let name, phoneNumber: String
     let skills: [String]
 
+    //использовать нативную апишку для конвертации
     enum CodingKeys: String, CodingKey {
         case name
         case phoneNumber = "phone_number"

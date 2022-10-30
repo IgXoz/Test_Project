@@ -7,31 +7,30 @@
 
 import Foundation
 
-protocol EmployeeViewProtocol: class {
-    var employee: [Employee] { get set }
-    var employees: Welcome? { get set }
+protocol EmployeeViewProtocol: AnyObject {
+    var viewEmployee: [Employee] { get set }
     // необходимо наполнить протокол
     
 }
 
-protocol EmployeePresenterProtocol: class{
+protocol EmployeePresenterProtocol: AnyObject {
     
     //должен иметь router и методы, которые вызываются при нажатии на ячейку/кнопку
     
     var router: EmployeeRouterProtocol! { set get } // 
-    func configureViewPresenter() // метод инициализирует и конфигурирует первоначальные
+    func configureViewPresenter(completion: @escaping (_ interactorEmployee: [Employee])->()) // метод инициализирует и конфигурирует первоначальные
     //данные для визуальных элементов во вьюконтроллере.
     
     func cellClicked() // вызывается при тапе на ячейку. мб этот метода и не нужен
     
 }
 
-protocol EmployeeInteractorProtocol: class {
+protocol EmployeeInteractorProtocol: AnyObject {
     
-    var employee: [Employee] { get set }
+    var interactorEmployee: [Employee] { get set }
     var employees: Welcome? { get set }
     
-    func loadDataInteractor()
+    func loadDataInteractor(completion: @escaping (_ employee: [Employee])->())
     
     func saveDataInteractor()
     
@@ -39,7 +38,7 @@ protocol EmployeeInteractorProtocol: class {
       
 }
 
-protocol EmployeeConfiguratorProtocol: class {
+protocol EmployeeConfiguratorProtocol: AnyObject {
     
     func configure(with viewController: EmployeeViewController)
     
@@ -47,7 +46,7 @@ protocol EmployeeConfiguratorProtocol: class {
     
 }
 
-protocol EmployeeRouterProtocol: class {
+protocol EmployeeRouterProtocol: AnyObject {
 // this protocol is not required for one screen app.
 
 }

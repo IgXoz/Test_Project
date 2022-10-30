@@ -43,6 +43,7 @@ final class EmployeeCell: UITableViewCell, ReusableIdentifier {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 10
         stackView.axis = .vertical
+        stackView.backgroundColor = .gray
         return stackView
     }()
 
@@ -63,7 +64,7 @@ final class EmployeeCell: UITableViewCell, ReusableIdentifier {
 
         let margins = contentView.layoutMarginsGuide
         NSLayoutConstraint.activate([
-            margins.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            margins.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: -70),
             margins.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             margins.topAnchor.constraint(equalTo: stackView.topAnchor),
             margins.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)

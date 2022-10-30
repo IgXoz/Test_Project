@@ -9,7 +9,7 @@ import Foundation
 
 class EmployeeConfigurator: EmployeeConfiguratorProtocol {
     
-    //Этот метод необходим для конфишурации модуля. EmployeeViewController имеет свойство configure, кот. будет конфигурироваться во viewDidLoad. Все компоненты общаются между собой с помощью протоколов. 
+    //Этот метод необходим для конфигурации модуля. EmployeeViewController имеет свойство configure, кот. будет конфигурироваться во viewDidLoad. Все компоненты общаются между собой с помощью протоколов. 
     func configure(with viewController: EmployeeViewController) {
         let presenter = EmployeePresenter(view: viewController)
         let interactor = EmployeeInteractor(presenter: presenter)
