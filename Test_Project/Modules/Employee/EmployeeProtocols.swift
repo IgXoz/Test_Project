@@ -8,7 +8,9 @@
 import Foundation
 
 protocol EmployeeViewProtocol: AnyObject {
-    var viewEmployee: [Employee] { get set }
+//    var viewEmployee: [Employee] { get set }
+    
+    func reloadData(for section: EmployeeSectionViewModel)
     // необходимо наполнить протокол
     
 }
@@ -16,12 +18,12 @@ protocol EmployeeViewProtocol: AnyObject {
 protocol EmployeePresenterProtocol: AnyObject {
     
     //должен иметь router и методы, которые вызываются при нажатии на ячейку/кнопку
-    
     var router: EmployeeRouterProtocol! { set get } // 
     func configureViewPresenter(completion: @escaping (_ interactorEmployee: [Employee])->()) // метод инициализирует и конфигурирует первоначальные
     //данные для визуальных элементов во вьюконтроллере.
     
-    func cellClicked() // вызывается при тапе на ячейку. мб этот метода и не нужен
+    func employeeDidReceive(with dataStore: EmployeeDataStore)
+    func viewDidLoad()
     
 }
 
@@ -35,6 +37,7 @@ protocol EmployeeInteractorProtocol: AnyObject {
     func saveDataInteractor()
     
     func removeDataInteractor()
+    func fetchEmployeeInfo()
       
 }
 

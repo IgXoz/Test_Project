@@ -7,7 +7,28 @@
 
 import UIKit
 
-final class EmployeeCell: UITableViewCell, ReusableIdentifier {
+class EmployeeCell: UITableViewCell, CellModelRepresentable { //ReusableIdentifier
+    
+    var viewModel: EmployeeCellViewModelProtocol? {
+        didSet {
+            updateView()
+        }
+    }
+    
+    private func updateView() {
+        guard let viewModel = viewModel as? EmployeeCellViewModel else { return }
+        nameLabel.text = viewModel.employeeName
+        phoneNumberLabel.text = viewModel.employeePhoneNumber
+        skillLabel.text = {
+            var skills = ""
+            for skill in viewModel.employeeSkill {
+                skills += "\(skill), "
+            }
+            return skills
+        }()
+    }
+    
+    //--------------
     
     //Настроим лейблы 
     let nameLabel: UILabel = {
@@ -43,7 +64,7 @@ final class EmployeeCell: UITableViewCell, ReusableIdentifier {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 10
         stackView.axis = .vertical
-        stackView.backgroundColor = .gray
+//        stackView.backgroundColor = .gray
         return stackView
     }()
 
@@ -58,7 +79,7 @@ final class EmployeeCell: UITableViewCell, ReusableIdentifier {
         setupView()
     }
 
-    //рпиватная функция для настройки стэкВью
+    //Приватная функция для настройки стэкВью
     private func setupView() {
         contentView.addSubview(stackView)
 
@@ -74,20 +95,14 @@ final class EmployeeCell: UITableViewCell, ReusableIdentifier {
     //Временный метод, чтобы наполнить ячейку во вьюКонтроллере, метод должен
     //быть изменен
     func configure() {
-        nameLabel.text = "Name_Test"
-        phoneNumberLabel.text = "PhoneNumber_Test"
-        skillLabel.text = "Skills_Test"
+//        nameLabel.text = "Name_Test"
+//        phoneNumberLabel.text = "PhoneNumber_Test"
+//        skillLabel.text = "Skills_Test"
         
     }
+  
 }
 
-//Протокол и расширение для идентификатора ячейки -> нужно перенести в другой файл
-protocol ReusableIdentifier: AnyObject {
-    static var reuseIdentifier: String { get }
-}
 
-extension ReusableIdentifier {
-    static var reuseIdentifier: String {
-        return "\(self)"
-    }
-}
+
+

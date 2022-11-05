@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		781145C12916E86700020E33 /* EmployeeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781145C02916E86700020E33 /* EmployeeCellViewModel.swift */; };
+		781145C32917063700020E33 /* EmployeeCellProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781145C22917063700020E33 /* EmployeeCellProtocols.swift */; };
 		783A9CCD2901C59000927BA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CCC2901C59000927BA1 /* AppDelegate.swift */; };
 		783A9CCF2901C59000927BA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CCE2901C59000927BA1 /* SceneDelegate.swift */; };
 		783A9CD62901C59200927BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 783A9CD52901C59200927BA1 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		781145C02916E86700020E33 /* EmployeeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCellViewModel.swift; sourceTree = "<group>"; };
+		781145C22917063700020E33 /* EmployeeCellProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCellProtocols.swift; sourceTree = "<group>"; };
 		783A9CC92901C59000927BA1 /* Test_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		783A9CCC2901C59000927BA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		783A9CCE2901C59000927BA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +59,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		781145BF2916E84500020E33 /* EmployeeCell */ = {
+			isa = PBXGroup;
+			children = (
+				78CA334929058D4600916341 /* EmployeeCell.swift */,
+				781145C02916E86700020E33 /* EmployeeCellViewModel.swift */,
+				781145C22917063700020E33 /* EmployeeCellProtocols.swift */,
+			);
+			path = EmployeeCell;
+			sourceTree = "<group>";
+		};
 		783A9CC02901C59000927BA1 = {
 			isa = PBXGroup;
 			children = (
@@ -97,8 +111,8 @@
 		783A9CE12901D61D00927BA1 /* Employee */ = {
 			isa = PBXGroup;
 			children = (
+				781145BF2916E84500020E33 /* EmployeeCell */,
 				783A9CE22901D6C500927BA1 /* EmployeeViewController.swift */,
-				78CA334929058D4600916341 /* EmployeeCell.swift */,
 				783A9CE42901D6D100927BA1 /* EmployeePresenter.swift */,
 				783A9CE62901D6DC00927BA1 /* EmployeeInteractor.swift */,
 				783A9CE82901D6EB00927BA1 /* EmployeeConfigurator.swift */,
@@ -202,12 +216,14 @@
 				783A9CF32901D88500927BA1 /* EmployeeService.swift in Sources */,
 				783A9CE52901D6D100927BA1 /* EmployeePresenter.swift in Sources */,
 				783A9CF02901D77B00927BA1 /* Employee.swift in Sources */,
+				781145C12916E86700020E33 /* EmployeeCellViewModel.swift in Sources */,
 				783A9CE32901D6C500927BA1 /* EmployeeViewController.swift in Sources */,
 				783A9CF72901D8A100927BA1 /* StorageService.swift in Sources */,
 				783A9CE92901D6EB00927BA1 /* EmployeeConfigurator.swift in Sources */,
 				78CA334A29058D4600916341 /* EmployeeCell.swift in Sources */,
 				783A9CCD2901C59000927BA1 /* AppDelegate.swift in Sources */,
 				783A9CEB2901D6F600927BA1 /* EmployeeRouter.swift in Sources */,
+				781145C32917063700020E33 /* EmployeeCellProtocols.swift in Sources */,
 				783A9CCF2901C59000927BA1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

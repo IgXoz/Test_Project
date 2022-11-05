@@ -20,6 +20,14 @@ class EmployeeInteractor: EmployeeInteractorProtocol {
         completion(self.interactorEmployee)
     }
     
+    func fetchEmployeeInfo() {
+        serverService.loadData { employees in
+            let dataStore = EmployeeDataStore(employees: employees)
+            self.presenter.employeeDidReceive(with: dataStore)
+        }
+        
+        
+    }
     
     var employees: Welcome? // s/b deleted
     var interactorEmployee: [Employee] = [] // s/b deleted

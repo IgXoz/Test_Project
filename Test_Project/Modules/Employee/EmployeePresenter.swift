@@ -7,10 +7,22 @@
 
 import Foundation
 
+struct EmployeeDataStore {
+    let employees: [Employee]
+}
+
 class EmployeePresenter: EmployeePresenterProtocol {
-    func cellClicked() {
-        print("cellClicked")
+   
+    func configureViewPresenter(completion: @escaping ([Employee]) -> ()) {
+        interactor.loadDataInteractor { interactorEmployee in
+            self.presenterEmployee = interactorEmployee
+            print("Employee in loadDataPresenter is \(self.presenterEmployee)")
+            print("EmployeeClosure in loadDataPresenter is \(interactorEmployee)")
+            completion(self.presenterEmployee)
+        }
     }
+    
+    private var dataStore: EmployeeDataStore?
     var presenterEmployee: [Employee] = []
     var router: EmployeeRouterProtocol! // скорее всего должен быть удален
     
@@ -21,35 +33,19 @@ class EmployeePresenter: EmployeePresenterProtocol {
     required init(view: EmployeeViewProtocol) {
         self.view = view
     }
-    
-    // метод инициализирует и конфигурирует первоначальные данные для визуальных элементов во вьюконтроллере
-//    func configureViewPresenter()  -> ([Employee]) {
-//
-////        sendModel(interactor.interactorEmployee)
-////        interactor.saveDataInteractor()
-////        let a = {interactor.saveDataInteractor}()
-////        print("configureViewPresenter is \")
-////        return interactor.loadDataInteractor()
-//
-//        interactor.loadDataInteractor { interactorEmployee in
-//            self.presenterEmployee = interactorEmployee
-//            print("Employee in loadDataPresenter is \(self.presenterEmployee)")
-//            print("EmployeeClosure in loadDataPresenter is \(interactorEmployee)")
-//        }
-////        print("sendModelInteractor")
-//
-//    }
-    func configureViewPresenter(completion: @escaping ([Employee]) -> ()) {
-        interactor.loadDataInteractor { interactorEmployee in
-            self.presenterEmployee = interactorEmployee
-            print("Employee in loadDataPresenter is \(self.presenterEmployee)")
-            print("EmployeeClosure in loadDataPresenter is \(interactorEmployee)")
-            completion(self.presenterEmployee)
-        }
+    func employeeDidReceive(with dataStore: EmployeeDataStore) {
+        self.dataStore = dataStore
+        let section = EmployeeSectionViewModel()
+        dataStore.employees.forEach({ Employee in
+            section.rows.append(EmployeeCellViewModel(employee: Employee))
+        })
+        view.reloadData(for: section)
     }
     
+    // метод инициализирует и конфигурирует первоначальные данные для визуальных элементов во вьюконтроллере
+    
     func sendModel(_ presenterEmployee: [Employee]) {
-        view.viewEmployee = presenterEmployee
+//        view.viewEmployee = presenterEmployee
     }
     
     func viewDidBeginLoadingPresenter() {
@@ -59,6 +55,10 @@ class EmployeePresenter: EmployeePresenterProtocol {
     func viewRefreshDataPresenter() {
         print("viewRefreshDataPresenter")
         
+    }
+    
+    func viewDidLoad() {
+        interactor.fetchEmployeeInfo()
     }
  
 }
