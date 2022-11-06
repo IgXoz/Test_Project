@@ -1,10 +1,3 @@
-//
-//  Employee.swift
-//  Test_Project
-//
-//  Created by Igor a Stepanov on 20.10.2022.
-//
-
 import Foundation
 
 // MARK: - Welcome
@@ -23,7 +16,7 @@ struct Employee: Codable {
     let name, phoneNumber: String
     let skills: [String]
 
-    //использовать нативную апишку для конвертации
+    //использовать нативную апишку для конвертации snakeCase в camelCase
     enum CodingKeys: String, CodingKey {
         case name
         case phoneNumber = "phone_number"

@@ -1,26 +1,19 @@
-//
-//  EmployeeCellViewModel.swift
-//  Test_Project
-//
-//  Created by Igor a Stepanov on 05.11.2022.
-//
-
 import Foundation
 
+// MARK: EmployeeSectionViewModel
 class EmployeeSectionViewModel: EmployeeSectionViewModelProtocol {
     var rows: [EmployeeCellViewModelProtocol] = []
 }
 
+// MARK: EmployeeCellViewModel
 class EmployeeCellViewModel: EmployeeCellViewModelProtocol {
     
     var cellIdentifier: String {
         "EmployeeCell"
     }
-    
-    var cellHeight: Double {
+    var cellHeight: Double { // лучше удалить
         100
     }
-    
     var employeeName: String {
         employee.name
     }
@@ -30,7 +23,6 @@ class EmployeeCellViewModel: EmployeeCellViewModelProtocol {
     var employeeSkill: [String] {
         employee.skills
     }
-    
     private let employee: Employee
     
     required init(employee: Employee) {

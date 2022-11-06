@@ -1,64 +1,41 @@
-//
-//  EmploeeViewController.swift
-//  Test_Project
-//
-//  Created by Igor a Stepanov on 20.10.2022.
-//
-
-
-import Foundation
+//import Foundation
 import UIKit
 
 class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     
-    // Временные заглушки, чтобы сконфигурировать ячейку
-//    var viewEmployee: [Employee] = []
     
+    // MARK: Properties:
+    var presenter: EmployeePresenterProtocol!
+    private let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator()
     private var sectionViewModel: EmployeeSectionViewModelProtocol = EmployeeSectionViewModel()
-    
-    //необходимы для конфигурации
-    var presenter: EmployeePresenterProtocol! // из этого экземпляра будем вызывать все методы презентора
-    let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator() // конфигурирует вьюконтроллер
-    
-    //Создадим tableView
     private var employeeTableView: UITableView {
-            let tableView = UITableView.init(frame: .zero, style: .grouped)
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-                return tableView
+        let tableView = UITableView.init(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }
     
+    // MARK: Methods
+    func reloadData(for section: EmployeeSectionViewModel) {
+        sectionViewModel = section
+        employeeTableView.reloadData()
+    }
+    
+    // MARK: Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(employeeTableView) // required?
         employeeTableView.register(EmployeeCell.self, forCellReuseIdentifier: "EmployeeCell") // зарегистрировали кастомную ячейку
         configurator.configure(with: self)
         presenter.viewDidLoad()
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         employeeTableView.frame = view.bounds
     }
-    
-    //Delete method
-    private func configureCell(cell: EmployeeCell, for indexPath: IndexPath) {
-//        let employee = employee[indexPath.row] // получили конкретный объект - персонаж
-//        print ("Empl \(self.viewEmployee)")
-            cell.nameLabel.text = "Name: (employee.name)"
-            cell.phoneNumberLabel.text = "Phone Number: (employee.phoneNumber)"
-            cell.skillLabel.text = "Skills: (employee.skills.count)"
-        }
-       
-    
-    func reloadData(for section: EmployeeSectionViewModel) {
-        sectionViewModel = section
-        employeeTableView.reloadData()
-    }
-    
-    
-    
-    
-    //-----
+
+    // MARK: UITableViewDataSource, UITableViewDelegate:
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sectionViewModel.rows.count
     }
@@ -77,11 +54,6 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     override  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         CGFloat(sectionViewModel.rows[indexPath.row].cellHeight)
     }
-    
-    
-    
-    
-    
     
     }
     
@@ -110,18 +82,4 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        CGFloat(sectionViewModel.rows[indexPath.row].cellHeight)
 //    }
-//}
-
-//// MARK: UITableViewDataSourse & UITableViewDelegate methods
-//override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    let cell = employeeTableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") as! EmployeeCell
-////        cell.configure()
-////                configureCell(cell: cell, for: indexPath)
-//    print("4 employee: \(viewEmployee)")//вызван метод-заглушка
-//    return cell
-//}
-//
-//override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-////                employee.count
-//    4
 //}

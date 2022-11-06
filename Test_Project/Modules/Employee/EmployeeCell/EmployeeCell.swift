@@ -1,36 +1,14 @@
-//
-//  EmployeeCell.swift
-//  Test_Project
-//
-//  Created by Igor a Stepanov on 23.10.2022.
-//
-
 import UIKit
 
-class EmployeeCell: UITableViewCell, CellModelRepresentable { //ReusableIdentifier
+class EmployeeCell: UITableViewCell, CellModelRepresentable { //ReusableIdentifier - протокол для identifier
     
     var viewModel: EmployeeCellViewModelProtocol? {
         didSet {
             updateView()
         }
     }
-    
-    private func updateView() {
-        guard let viewModel = viewModel as? EmployeeCellViewModel else { return }
-        nameLabel.text = viewModel.employeeName
-        phoneNumberLabel.text = viewModel.employeePhoneNumber
-        skillLabel.text = {
-            var skills = ""
-            for skill in viewModel.employeeSkill {
-                skills += "\(skill), "
-            }
-            return skills
-        }()
-    }
-    
-    //--------------
-    
-    //Настроим лейблы 
+
+    // MARK: SetupLabels
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
@@ -55,19 +33,18 @@ class EmployeeCell: UITableViewCell, CellModelRepresentable { //ReusableIdentifi
         return label
     }()
     
-    //Поместим Лейблы в стэкВью, чтобы их с лейблами было удобнее работать
+    //Поместим Лейблы в стэкВью
     private lazy var stackView: UIStackView = {
-        
         let stackView = UIStackView(arrangedSubviews: [nameLabel,
                                                        phoneNumberLabel,
                                                        skillLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 10
         stackView.axis = .vertical
-//        stackView.backgroundColor = .gray
         return stackView
     }()
 
+    // MARK: Initializers
     //Переопределим инициализаторы, добавив функцию setupView
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -79,7 +56,7 @@ class EmployeeCell: UITableViewCell, CellModelRepresentable { //ReusableIdentifi
         setupView()
     }
 
-    //Приватная функция для настройки стэкВью
+    // MARK: Methods
     private func setupView() {
         contentView.addSubview(stackView)
 
@@ -92,15 +69,19 @@ class EmployeeCell: UITableViewCell, CellModelRepresentable { //ReusableIdentifi
         ])
     }
     
-    //Временный метод, чтобы наполнить ячейку во вьюКонтроллере, метод должен
-    //быть изменен
-    func configure() {
-//        nameLabel.text = "Name_Test"
-//        phoneNumberLabel.text = "PhoneNumber_Test"
-//        skillLabel.text = "Skills_Test"
-        
+    private func updateView() {
+        guard let viewModel = viewModel as? EmployeeCellViewModel else { return }
+        nameLabel.text = viewModel.employeeName
+        phoneNumberLabel.text = viewModel.employeePhoneNumber
+        skillLabel.text = {
+            var skills = ""
+            for skill in viewModel.employeeSkill {
+                skills += "\(skill), "
+            }
+            return skills
+        }()
     }
-  
+    
 }
 
 

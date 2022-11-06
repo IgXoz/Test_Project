@@ -1,15 +1,8 @@
-//
-//  EmploeeConfigurator.swift
-//  Test_Project
-//
-//  Created by Igor a Stepanov on 20.10.2022.
-//
-
 import Foundation
 
 class EmployeeConfigurator: EmployeeConfiguratorProtocol {
     
-    //Этот метод необходим для конфигурации модуля. EmployeeViewController имеет свойство configure, кот. будет конфигурироваться во viewDidLoad. Все компоненты общаются между собой с помощью протоколов. 
+    //Этот метод необходим для конфигурации модуля. EmployeeViewController имеет свойство configure, кот. будет конфигурироваться во viewDidLoad.
     func configure(with viewController: EmployeeViewController) {
         let presenter = EmployeePresenter(view: viewController)
         let interactor = EmployeeInteractor(presenter: presenter)
@@ -22,6 +15,6 @@ class EmployeeConfigurator: EmployeeConfiguratorProtocol {
     
     
     //чтобы не получить утечку памяти презентер у вьюконтроллера указывается как strong, а вьюконтроллер у презентера как weak, интерактор у презентера указывается как weak и тд
-    // при закрытии viewController все жлементы уничтожаются, тк никто не может иметь сильную ссылку на вьюконтроллер
+    // при закрытии viewController все элементы уничтожаются, тк никто не может иметь сильную ссылку на вьюконтроллер
     
 }

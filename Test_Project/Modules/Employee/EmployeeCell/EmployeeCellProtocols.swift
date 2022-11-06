@@ -1,10 +1,3 @@
-//
-//  EmployeeCellProtocols.swift
-//  Test_Project
-//
-//  Created by Igor a Stepanov on 05.11.2022.
-//
-
 import Foundation
 
 protocol EmployeeCellViewModelProtocol {
@@ -24,6 +17,7 @@ protocol CellModelRepresentable {
     var viewModel: EmployeeCellViewModelProtocol? { get }
 }
 
+// MARK: Протокол для identifier:
 //protocol ReusableIdentifier: AnyObject {
 //    static var reuseIdentifier: String { get }
 //}
