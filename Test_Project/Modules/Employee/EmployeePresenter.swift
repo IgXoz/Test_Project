@@ -21,9 +21,10 @@ class EmployeePresenter: EmployeePresenterProtocol {
     func employeeDidReceive(with dataStore: EmployeeDataStore) {
         self.dataStore = dataStore
         let section = EmployeeSectionViewModel()
-        dataStore.employees.forEach({ Employee in
-            section.rows.append(EmployeeCellViewModel(employee: Employee))
-        })
+        dataStore.employees.forEach { employee in
+            let cellViewModel = EmployeeCellViewModel(employee: employee)
+            section.rows.append(cellViewModel)
+        }
         view.reloadData(for: section)
     }
     
