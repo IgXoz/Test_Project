@@ -22,7 +22,7 @@
 		783A9CF02901D77B00927BA1 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CEF2901D77B00927BA1 /* Employee.swift */; };
 		783A9CF32901D88500927BA1 /* EmployeeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CF22901D88500927BA1 /* EmployeeService.swift */; };
 		783A9CF52901D89600927BA1 /* ServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CF42901D89600927BA1 /* ServerService.swift */; };
-		783A9CF72901D8A100927BA1 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CF62901D8A100927BA1 /* StorageService.swift */; };
+		783A9CF72901D8A100927BA1 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CF62901D8A100927BA1 /* FileManager.swift */; };
 		78CA334A29058D4600916341 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CA334929058D4600916341 /* EmployeeCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +44,7 @@
 		783A9CEF2901D77B00927BA1 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		783A9CF22901D88500927BA1 /* EmployeeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeService.swift; sourceTree = "<group>"; };
 		783A9CF42901D89600927BA1 /* ServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerService.swift; sourceTree = "<group>"; };
-		783A9CF62901D8A100927BA1 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		783A9CF62901D8A100927BA1 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		78CA334929058D4600916341 /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,7 +135,7 @@
 			children = (
 				783A9CF22901D88500927BA1 /* EmployeeService.swift */,
 				783A9CF42901D89600927BA1 /* ServerService.swift */,
-				783A9CF62901D8A100927BA1 /* StorageService.swift */,
+				783A9CF62901D8A100927BA1 /* FileManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 				783A9CF02901D77B00927BA1 /* Employee.swift in Sources */,
 				781145C12916E86700020E33 /* EmployeeCellViewModel.swift in Sources */,
 				783A9CE32901D6C500927BA1 /* EmployeeViewController.swift in Sources */,
-				783A9CF72901D8A100927BA1 /* StorageService.swift in Sources */,
+				783A9CF72901D8A100927BA1 /* FileManager.swift in Sources */,
 				783A9CE92901D6EB00927BA1 /* EmployeeConfigurator.swift in Sources */,
 				78CA334A29058D4600916341 /* EmployeeCell.swift in Sources */,
 				783A9CCD2901C59000927BA1 /* AppDelegate.swift in Sources */,

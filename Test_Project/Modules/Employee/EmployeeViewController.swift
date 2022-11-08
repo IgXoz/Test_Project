@@ -41,8 +41,8 @@ class EmployeeViewController: UIViewController, EmployeeViewProtocol {
 }
     
 
-// MARK: - UITableViewDataSource
-extension EmployeeViewController: UITableViewDataSource {
+// MARK: - UITableViewDataSource, UITableViewDelegate
+extension EmployeeViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sectionViewModel.rows.count
@@ -54,10 +54,7 @@ extension EmployeeViewController: UITableViewDataSource {
         cell.viewModel = cellViewModel
         return cell
     }
-}
-
-// MARK: - UITableViewDelegate
-extension EmployeeViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -66,3 +63,5 @@ extension EmployeeViewController: UITableViewDelegate {
         CGFloat(sectionViewModel.rows[indexPath.row].cellHeight)
     }
 }
+
+

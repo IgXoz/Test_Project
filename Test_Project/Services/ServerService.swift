@@ -3,6 +3,7 @@ import Foundation
 
 protocol ServerServiceProtocol {
     func loadData(completion: @escaping (_ employee: [Employee])->())
+    func loadDataForCache(completion: @escaping (_ data: Data)->())
 }
 
 class ServerService: ServerServiceProtocol {
@@ -26,7 +27,37 @@ class ServerService: ServerServiceProtocol {
                 }
             } .resume()
 }
-
-
+    
+    
+    func loadDataForCache(completion: @escaping (_ data: Data)->()) {
+        guard let url = URL(string: employeeJson) else {return}
+        URLSession.shared.dataTask(with: url) { data, responce, error in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "No error description")
+                return}
+            completion(data)
+        }
+        
+    }
 }
 
+
+// MARK: Decoder
+
+
+protocol DecoderProtocol {
+    func decodeData(_ data: Data, completion: @escaping (_ employee: [Employee])->())
+}
+
+class Decoder: DecoderProtocol {
+    
+    func decodeData(_ data: Data, completion: @escaping ([Employee]) -> ()) {
+        do {
+            let welcome = try JSONDecoder().decode(Welcome.self, from: data)
+            let employees = welcome.company.employees
+            completion(employees)
+        } catch let error {
+            print("Error serialization JSON ", error.localizedDescription)
+        }
+    }
+}
