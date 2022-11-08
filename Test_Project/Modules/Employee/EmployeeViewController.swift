@@ -1,116 +1,68 @@
-//
-//  EmploeeViewController.swift
-//  Test_Project
-//
-//  Created by Igor a Stepanov on 20.10.2022.
-//
-
-
-import Foundation
+//import Foundation
 import UIKit
 
-class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
+//
+class EmployeeViewController: UIViewController, EmployeeViewProtocol {
     
-    // Временные заглушки, чтобы сконфигурировать ячейку
-    var viewEmployee: [Employee] = []
     
-    //необходимы для конфигурации
-    var presenter: EmployeePresenterProtocol! // из этого экземпляра будем вызывать все методы презентора
-    let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator() // конфигурирует вьюконтроллер
+    // MARK: Properties:
+    var presenter: EmployeePresenterProtocol!
+    private let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator()
+    private var sectionViewModel: EmployeeSectionViewModelProtocol = EmployeeSectionViewModel()
     
-    //Создадим tableView
-    private var employeeTableView: UITableView {
-        let tableView = UITableView.init(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    
+        private var tableView: UITableView {
+            let tableView = UITableView.init(frame: .zero, style: .grouped)
+            tableView.translatesAutoresizingMaskIntoConstraints = false
+            return tableView
     }
     
+    // MARK: Methods
+    func reloadData(for section: EmployeeSectionViewModel) {
+        sectionViewModel = section
+        tableView.reloadData()
+    }
+    
+    // MARK: Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(employeeTableView) // required?
-        tableView.register(EmployeeCell.self, forCellReuseIdentifier: "reuseIdentifier") // зарегистрировали кастомную ячейку
-//        setupLayout()
+        self.view.addSubview(tableView) // required?
+        tableView.register(EmployeeCell.self, forCellReuseIdentifier: "EmployeeCell") // зарегистрировали кастомную ячейку
         configurator.configure(with: self)
-        dataLoaded()
+        presenter.viewDidLoad()
+        
     }
     
-    // MARK: UITableViewDataSourse & UITableViewDelegate methods
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") as! EmployeeCell
-//        cell.configure()
-                configureCell(cell: cell, for: indexPath)
-        print("4 employee: \(viewEmployee)")//вызван метод-заглушка
-        return cell
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//                employee.count
-        4
-    }
-    
-    private func dataLoaded() {
-        presenter.configureViewPresenter(completion: { presenterEmployee in
-            
-            self.viewEmployee = presenterEmployee
-            self.employeeTableView.reloadData()
-            print("Employee in loadDataView is \(self.viewEmployee)")
-            print("EmployeeClosure in loadDataPresenter is \(presenterEmployee)")
-            
-//            completion(self.viewEmployee)
-        })
-        
-        print ("ViewController empoyee: \(self.viewEmployee)")
-        
-//        DispatchQueue.main.async {
-//            self.titleInfo.text = planetInfo.title
-//            self.dateInfo.text = planetInfo.date
-////                self.explanationInfo.text = planetInfo.explanation
-//            self.textView.text = planetInfo.explanation
-        
-        
-        DispatchQueue.main.async {
-            self.employeeTableView.reloadData()
-        }
-    }
-    
-    private func configureCell(cell: EmployeeCell, for indexPath: IndexPath) {
-//        let employee = employee[indexPath.row] // получили конкретный объект - персонаж
-        print ("Empl \(self.viewEmployee)")
-            cell.nameLabel.text = "Name: (employee.name)"
-            cell.phoneNumberLabel.text = "Phone Number: (employee.phoneNumber)"
-            cell.skillLabel.text = "Skills: (employee.skills.count)"
-        }
-       
-    
-    
-    private func dataLoaded1() {
-        
-        
-        presenter.configureViewPresenter(completion: { presenterEmployee in
-            
-            self.viewEmployee = presenterEmployee
-            self.employeeTableView.reloadData()
-            print("Employee in loadDataView is \(self.viewEmployee)")
-            print("EmployeeClosure in loadDataPresenter is \(presenterEmployee)")
-            
-//            completion(self.viewEmployee)
-        })
-        
-        print ("ViewController empoyee: \(self.viewEmployee)")
-        
-//        DispatchQueue.main.async {
-//            self.titleInfo.text = planetInfo.title
-//            self.dateInfo.text = planetInfo.date
-////                self.explanationInfo.text = planetInfo.explanation
-//            self.textView.text = planetInfo.explanation
-        
-        
-        DispatchQueue.main.async {
-            self.employeeTableView.reloadData()
-        }
-    }
-    
-    
-    }
+}
     
 
+// MARK: - UITableViewDataSource
+extension EmployeeViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        sectionViewModel.rows.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellViewModel = sectionViewModel.rows[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath) as! EmployeeCell
+        cell.viewModel = cellViewModel
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension EmployeeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        CGFloat(sectionViewModel.rows[indexPath.row].cellHeight)
+    }
+}

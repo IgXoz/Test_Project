@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Test_Project
-//
-//  Created by Igor a Stepanov on 20.10.2022.
-//
-
 import UIKit
 
 @main
@@ -14,7 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions launchOptions:
     [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.backgroundColor = .gray
+//    window?.backgroundColor = .gray
     window?.rootViewController = EmployeeViewController()
     window?.makeKeyAndVisible()
     return true
