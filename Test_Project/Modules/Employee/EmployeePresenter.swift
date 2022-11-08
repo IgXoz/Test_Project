@@ -29,7 +29,10 @@ class EmployeePresenter: EmployeePresenterProtocol {
     }
     
     func viewDidLoad() {
-        interactor.fetchEmployeeInfo()
+//        interactor.fetchEmployeeInfo()
+        interactor.fetchNetworkData()
+//        interactor.fetchCachedData()
+        
     }
  
 }

@@ -13,6 +13,9 @@ protocol EmployeePresenterProtocol: AnyObject {
 
 protocol EmployeeInteractorProtocol: AnyObject {
     func fetchEmployeeInfo()
+    func fetchNetworkData()
+    func fetchCachedData()
+    
 }
 
 protocol EmployeeConfiguratorProtocol: AnyObject {

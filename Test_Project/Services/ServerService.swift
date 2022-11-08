@@ -3,7 +3,8 @@ import Foundation
 
 protocol ServerServiceProtocol {
     func loadData(completion: @escaping (_ employee: [Employee])->())
-    func loadDataForCache(completion: @escaping (_ data: Data)->())
+    func loadCachedData(_ fileUrl: URL?, completion: @escaping (_ data: Data)->())
+    func loadNetworkData(completion: @escaping (_ data: Data)->())
 }
 
 class ServerService: ServerServiceProtocol {
@@ -28,17 +29,31 @@ class ServerService: ServerServiceProtocol {
             } .resume()
 }
     
+    func loadCachedData(_ fileUrl: URL?, completion: @escaping (_ data: Data)->()) {
+        if let url = fileUrl {
+            URLSession.shared.dataTask(with: url) { data, responce, error in
+                guard let data = data else {
+                    print(error?.localizedDescription ?? "No error description")
+                    return}
+                completion(data)
+            } .resume()
+        } else {
+            print("No valid URL for cached file.")
+        }
+    }
     
-    func loadDataForCache(completion: @escaping (_ data: Data)->()) {
+    
+    func loadNetworkData(completion: @escaping (_ data: Data)->()) {
         guard let url = URL(string: employeeJson) else {return}
         URLSession.shared.dataTask(with: url) { data, responce, error in
             guard let data = data else {
                 print(error?.localizedDescription ?? "No error description")
                 return}
             completion(data)
-        }
-        
+        } .resume()
     }
+    
+    
 }
 
 

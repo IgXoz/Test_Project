@@ -1,9 +1,17 @@
 import Foundation
 
-class FileManagers {
+protocol CacheManagerProtocol {
+    func fetchCacheData()
+    func createDirectory()
+    func saveData(_ data: Data) -> (URL)
+    func deleteData(_ fileURL: URL)
+}
+
+
+class CacheManager: CacheManagerProtocol {
     
     private let manager = FileManager.default
-    private var folderUrl: URL
+    private var folderUrl: URL!
     
     //            let dataString = "OneTwo".data(using: .utf8)
     
@@ -18,11 +26,14 @@ class FileManagers {
                                      in: .userDomainMask).first else {return}
         
         self.folderUrl = url.appendingPathComponent("EmployeeData")
+        print("Folder URL is \(folderUrl)")
+//        return folderUrl
     }
     
     //Saves Data and returns url adress
     func saveData(_ data: Data) -> (URL) {
-         let fileUrl = folderUrl.appendingPathComponent("employeeData.txt")
+//        let folderUrl = createDirectory()
+         let fileUrl = folderUrl.appendingPathComponent("employeeData.json")
 
             manager.createFile(atPath: fileUrl.path, contents: data, attributes: [FileAttributeKey.creationDate: Date()])
             return fileUrl
@@ -61,8 +72,8 @@ class FileManagers {
         
     }
     
-    init(folderUrl: URL) {
-        self.folderUrl = folderUrl
-    }
+//    init(folderUrl: URL) {
+//        self.folderUrl = folderUrl
+//    }
     
 }

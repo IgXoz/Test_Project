@@ -2,7 +2,7 @@
 import UIKit
 
 //
-class EmployeeViewController: UIViewController, EmployeeViewProtocol {
+class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     
     
     // MARK: Properties:
@@ -11,22 +11,26 @@ class EmployeeViewController: UIViewController, EmployeeViewProtocol {
     private var sectionViewModel: EmployeeSectionViewModelProtocol = EmployeeSectionViewModel()
     
     
-        private var tableView: UITableView {
-            let tableView = UITableView.init(frame: .zero, style: .grouped)
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-            return tableView
-    }
+//        private var tableView: UITableView {
+//            let tableView = UITableView.init(frame: .zero, style: .grouped)
+//            tableView.translatesAutoresizingMaskIntoConstraints = false
+//            return tableView
+//    }
     
     // MARK: Methods
     func reloadData(for section: EmployeeSectionViewModel) {
         sectionViewModel = section
-        tableView.reloadData()
+       
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
     }
     
     // MARK: Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(tableView) // required?
+//        self.view.addSubview(tableView) // required?
         tableView.register(EmployeeCell.self, forCellReuseIdentifier: "EmployeeCell") // зарегистрировали кастомную ячейку
         configurator.configure(with: self)
         presenter.viewDidLoad()
@@ -37,31 +41,54 @@ class EmployeeViewController: UIViewController, EmployeeViewProtocol {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
+ 
     
 }
     
+extension EmployeeViewController {
 
-// MARK: - UITableViewDataSource, UITableViewDelegate
-extension EmployeeViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sectionViewModel.rows.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellViewModel = sectionViewModel.rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath) as! EmployeeCell
         cell.viewModel = cellViewModel
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         CGFloat(sectionViewModel.rows[indexPath.row].cellHeight)
     }
 }
+
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+//extension EmployeeViewController: UITableViewDataSource, UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        sectionViewModel.rows.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cellViewModel = sectionViewModel.rows[indexPath.row]
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath) as! EmployeeCell
+//        cell.viewModel = cellViewModel
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        CGFloat(sectionViewModel.rows[indexPath.row].cellHeight)
+//    }
+//}
 
 
