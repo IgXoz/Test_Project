@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		781145C12916E86700020E33 /* EmployeeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781145C02916E86700020E33 /* EmployeeCellViewModel.swift */; };
 		781145C32917063700020E33 /* EmployeeCellProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781145C22917063700020E33 /* EmployeeCellProtocols.swift */; };
+		781145E9291C412B00020E33 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781145E8291C412B00020E33 /* Decoder.swift */; };
+		781145EB291C4A6F00020E33 /* UserDefaultsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781145EA291C4A6E00020E33 /* UserDefaultsFile.swift */; };
+		781145ED291C504600020E33 /* NetworkObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781145EC291C504600020E33 /* NetworkObserver.swift */; };
 		783A9CCD2901C59000927BA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CCC2901C59000927BA1 /* AppDelegate.swift */; };
 		783A9CCF2901C59000927BA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783A9CCE2901C59000927BA1 /* SceneDelegate.swift */; };
 		783A9CD62901C59200927BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 783A9CD52901C59200927BA1 /* Assets.xcassets */; };
@@ -29,6 +32,9 @@
 /* Begin PBXFileReference section */
 		781145C02916E86700020E33 /* EmployeeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCellViewModel.swift; sourceTree = "<group>"; };
 		781145C22917063700020E33 /* EmployeeCellProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCellProtocols.swift; sourceTree = "<group>"; };
+		781145E8291C412B00020E33 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		781145EA291C4A6E00020E33 /* UserDefaultsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsFile.swift; sourceTree = "<group>"; };
+		781145EC291C504600020E33 /* NetworkObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObserver.swift; sourceTree = "<group>"; };
 		783A9CC92901C59000927BA1 /* Test_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		783A9CCC2901C59000927BA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		783A9CCE2901C59000927BA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				783A9CE02901D61200927BA1 /* Modules */,
-				783A9CEE2901D71400927BA1 /* Entities */,
+				783A9CEE2901D71400927BA1 /* Models */,
 				783A9CF12901D86900927BA1 /* Services */,
 				783A9CCE2901C59000927BA1 /* SceneDelegate.swift */,
 				783A9CCC2901C59000927BA1 /* AppDelegate.swift */,
@@ -122,20 +128,23 @@
 			path = Employee;
 			sourceTree = "<group>";
 		};
-		783A9CEE2901D71400927BA1 /* Entities */ = {
+		783A9CEE2901D71400927BA1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				783A9CEF2901D77B00927BA1 /* Employee.swift */,
+				783A9CF22901D88500927BA1 /* EmployeeService.swift */,
 			);
-			path = Entities;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		783A9CF12901D86900927BA1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				783A9CF22901D88500927BA1 /* EmployeeService.swift */,
 				783A9CF42901D89600927BA1 /* ServerService.swift */,
 				783A9CF62901D8A100927BA1 /* FileManager.swift */,
+				781145E8291C412B00020E33 /* Decoder.swift */,
+				781145EA291C4A6E00020E33 /* UserDefaultsFile.swift */,
+				781145EC291C504600020E33 /* NetworkObserver.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -212,7 +221,9 @@
 			files = (
 				783A9CE72901D6DC00927BA1 /* EmployeeInteractor.swift in Sources */,
 				783A9CED2901D70600927BA1 /* EmployeeProtocols.swift in Sources */,
+				781145EB291C4A6F00020E33 /* UserDefaultsFile.swift in Sources */,
 				783A9CF52901D89600927BA1 /* ServerService.swift in Sources */,
+				781145ED291C504600020E33 /* NetworkObserver.swift in Sources */,
 				783A9CF32901D88500927BA1 /* EmployeeService.swift in Sources */,
 				783A9CE52901D6D100927BA1 /* EmployeePresenter.swift in Sources */,
 				783A9CF02901D77B00927BA1 /* Employee.swift in Sources */,
@@ -224,6 +235,7 @@
 				783A9CCD2901C59000927BA1 /* AppDelegate.swift in Sources */,
 				783A9CEB2901D6F600927BA1 /* EmployeeRouter.swift in Sources */,
 				781145C32917063700020E33 /* EmployeeCellProtocols.swift in Sources */,
+				781145E9291C412B00020E33 /* Decoder.swift in Sources */,
 				783A9CCF2901C59000927BA1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

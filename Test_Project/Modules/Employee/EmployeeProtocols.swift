@@ -15,14 +15,13 @@ protocol EmployeeInteractorProtocol: AnyObject {
     func fetchEmployeeInfo()
     func fetchNetworkData()
     func fetchCachedData()
+    func testDecodeMethod() // test
     
 }
 
 protocol EmployeeConfiguratorProtocol: AnyObject {
     
     func configure(with viewController: EmployeeViewController)
-    
-    //внутри этого метода конфигурируется модуль
     
 }
 

@@ -27,7 +27,7 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
         
     }
     
-    // MARK: Override methods:
+    // MARK: LifeCycle methods:
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.view.addSubview(tableView) // required?
@@ -45,6 +45,7 @@ class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
     
 }
     
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension EmployeeViewController {
 
    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

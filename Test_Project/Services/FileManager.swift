@@ -1,5 +1,6 @@
 import Foundation
 
+// MARK: CacheManagerProtocol:
 protocol CacheManagerProtocol {
     func fetchCacheData()
     func createDirectory()
@@ -7,73 +8,46 @@ protocol CacheManagerProtocol {
     func deleteData(_ fileURL: URL)
 }
 
-
+// MARK: CacheManager:
 class CacheManager: CacheManagerProtocol {
     
+    // MARK: Private properties:
     private let manager = FileManager.default
     private var folderUrl: URL!
+
     
-    //            let dataString = "OneTwo".data(using: .utf8)
-    
-    func fetchCacheData() {
+    // MARK: CacheManagerProtocol methods:
+    func fetchCacheData() { // Need to be deleted
         
     }
-    
     
     // Changing folderURL
-    func createDirectory() {
+    func createDirectory() { // Need to check if Directory exists before trying to create it
         guard let url = manager.urls(for: .documentDirectory,
-                                     in: .userDomainMask).first else {return}
-        
+                                     in: .userDomainMask).first else { return }
         self.folderUrl = url.appendingPathComponent("EmployeeData")
-        print("Folder URL is \(folderUrl)")
-//        return folderUrl
+        print("Folder URL is \(folderUrl.path)")
     }
     
-    //Saves Data and returns url adress
+    //Saves Data and returns URL adress for cache-file.
     func saveData(_ data: Data) -> (URL) {
-//        let folderUrl = createDirectory()
-         let fileUrl = folderUrl.appendingPathComponent("employeeData.json")
-
-            manager.createFile(atPath: fileUrl.path, contents: data, attributes: [FileAttributeKey.creationDate: Date()])
+        createDirectory() // perhaps, needs to be deleted
+         let fileUrl = folderUrl.appendingPathComponent("employeeData.JSON")
+            manager.createFile(atPath: fileUrl.path, contents: nil, attributes: [FileAttributeKey.creationDate: Date()])
             return fileUrl
     }
     
-    
+    // Checks if file exists and removes file.
     func deleteData(_ fileURL: URL) {
         if manager.fileExists(atPath: fileURL.path) {
             print("File exists")
-            
             do {
                 try manager.removeItem(at: fileURL)
                 print("File removed successfully.")
-                
             } catch {
                 print(error)
             }
         }
     }
-    
-    
-    
-    
-    func something() {
-        let manager = FileManager.default
-        guard let url = manager.urls(for: .documentDirectory,
-                                     in: .userDomainMask).first else {return}
-        
-        let folderUrl = url.appendingPathComponent("EmployeeData")
-        
-        //        manager.createDirectory(at: folderUrl,
-        //                                        withIntermediateDirectories: true)
-        let fileUrl = folderUrl.appendingPathComponent("employeeData.txt")
-        let dataString = "OneTwo".data(using: .utf8)
-        manager.createFile(atPath: fileUrl.path, contents: dataString, attributes: [FileAttributeKey.creationDate: Date()])
-        
-    }
-    
-//    init(folderUrl: URL) {
-//        self.folderUrl = folderUrl
-//    }
     
 }
