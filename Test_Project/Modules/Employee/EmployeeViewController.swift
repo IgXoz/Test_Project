@@ -1,48 +1,45 @@
-//import Foundation
 import UIKit
 
-//
-class EmployeeViewController: UITableViewController, EmployeeViewProtocol {
-    
+class EmployeeViewController: UITableViewController, EmployeeDisplayLogicProtocol {
     
     // MARK: Properties:
-    var presenter: EmployeePresenterProtocol!
+    var presenter: EmployeePresentationLogicProtocol!
     private let configurator: EmployeeConfiguratorProtocol = EmployeeConfigurator()
     private var sectionViewModel: EmployeeSectionViewModelProtocol = EmployeeSectionViewModel()
-    
-    
-//        private var tableView: UITableView {
-//            let tableView = UITableView.init(frame: .zero, style: .grouped)
-//            tableView.translatesAutoresizingMaskIntoConstraints = false
-//            return tableView
-//    }
     
     // MARK: Methods
     func reloadData(for section: EmployeeSectionViewModel) {
         sectionViewModel = section
-       
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
     }
     
-    // MARK: LifeCycle methods:
+    // MARK: Private Methods
+    private func setUpConstraints() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    // MARK: LifeCycle Methods:
+    override func loadView() {
+        super.loadView()
+        setUpConstraints()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.addSubview(tableView) // required?
-        tableView.register(EmployeeCell.self, forCellReuseIdentifier: "EmployeeCell") // зарегистрировали кастомную ячейку
+        tableView.register(EmployeeCell.self, forCellReuseIdentifier: "EmployeeCell")
         configurator.configure(with: self)
-        presenter.viewDidLoad()
-        
+        presenter.displayData()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
-    }
- 
-    
 }
     
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -62,34 +59,6 @@ extension EmployeeViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        CGFloat(sectionViewModel.rows[indexPath.row].cellHeight)
-    }
 }
-
-
-// MARK: - UITableViewDataSource, UITableViewDelegate
-//extension EmployeeViewController: UITableViewDataSource, UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        sectionViewModel.rows.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cellViewModel = sectionViewModel.rows[indexPath.row]
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath) as! EmployeeCell
-//        cell.viewModel = cellViewModel
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        CGFloat(sectionViewModel.rows[indexPath.row].cellHeight)
-//    }
-//}
 
 

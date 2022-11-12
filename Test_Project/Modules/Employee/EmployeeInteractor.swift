@@ -2,88 +2,61 @@
 //  EmploeeInteractor.swift
 import Foundation
 
-class EmployeeInteractor: EmployeeInteractorProtocol {
-   
-    func fetchCachedData() {
+class EmployeeInteractor: EmployeeBusinessLogicProtocol {
+    
+    // MARK: BusinesLogicData Methods:
+    func loadData() {
+        if checkCache() {
+            fetchCachedData()
+        } else {
+            fetchNetworkData()
+        }
         
     }
-    
-    
     // MARK: Properties:
-    weak var presenter: EmployeePresenterProtocol!
-    let serverService: ServerServiceProtocol = ServerService()
-    let fileManager: CacheManagerProtocol = CacheManager()
+    weak var presenter: EmployeePresentationLogicProtocol!
+    let apiController: APIControllerProtocol = APIController()
     let decoder: DecoderProtocol = Decoder()
-    var fileUrl: URL? = URL(string:  "file:///Users/igor/Library/Developer/CoreSimulator/Devices/178E1B94-EAAC-4D8D-B8DA-7B91E0F1E020/data/Containers/Data/Application/505E7017-6AAB-4B97-8F8D-C08F0A4C153A/Documents/EmployeeData/employeeData.json") // need to be removed
+    private let urlStorage: URLStorageProtocol = URLStorage()
+    let fileManager: CacheManagerProtocol = CacheManager()
     
-    required init(presenter: EmployeePresenterProtocol) {
+    required init(presenter: EmployeePresentationLogicProtocol) {
         self.presenter = presenter
     }
-   
-    // MARK: Methods:
-    func fetchEmployeeInfo() {
-//        serverService.loadData { employees in
-//            let dataStore = EmployeeDataStore(employees: employees)
-//            self.presenter.employeeDidReceive(with: dataStore)
-//        }
-    }
-    
-    
+
+    // MARK: Private methods:
     //loads Data, sends Data to presenter and ViewModel, saves Data in cache,
     //returns fileUrl for cached Data.
-    func fetchNetworkData() {
-        fileManager.something()
-        serverService.loadDataFromServer { data in
-            self.decoder.decodeData(data) { employees in
+    private func fetchNetworkData() {
+        apiController.loadDataFromServer { data in // <- returns Data from server.
+            
+            self.decoder.decodeData(data) { employees in // <- returns [Employee]
                 let dataStore = EmployeeDataStore(employees: employees)
-                self.presenter.employeeDidReceive(with: dataStore)
+                self.presenter.employeeDidReceive(with: dataStore)// <- send [Employees] to presenter
             }
-            self.fileManager.createDirectory()
-            self.fileUrl = self.fileManager.saveData(data)
-            print("file URL is: \(self.fileUrl)")
+            
+            let url = self.fileManager.createFile() // <-Creates file and returns fileURL
+            self.urlStorage.saveURLIntoCache(url, self.urlStorage.key)// <- saves fileURL in UserDefaults
+            
+            self.fileManager.saveData(data, url) // <- saves Data into file
+            print("file URL is: \(url)")
         }
     }
-    var testData: Data? // test
-    func testDecodeMethod() { //test
-        serverService.loadDataFromServer { data in
-            print("Data loaded by loadNetworkData is: \(data)")
-            self.testData = data
-            print("Data pushed by loadNetworkData in testData is: ")
+    
+    private func fetchCachedData() {
+        apiController.loadCachedData(self.urlStorage.getURLFromCache(self.urlStorage.key)) { data in // returns Data from Cache by using URL from userDefaults
             
-            self.decoder.decodeData(self.testData) { employee in
-                print("Employee after decoding is: \(employee)")
-                print("testData after decoding is: \(self.testData)")
+            self.decoder.decodeData(data) { employees in // <- returns [Employee]
+                let dataStore = EmployeeDataStore(employees: employees)
+                self.presenter.employeeDidReceive(with: dataStore) // <- sends data to presenter
+            }
         }
-        
-        }
-        }
-        
-    
-    
-    
     }
     
-//    func fetchCachedData() {
-//        serverService.loadCachedData(fileUrl) { data in
-//            self.decoder.decodeData(data) { employees in
-//                let dataStore = EmployeeDataStore(employees: employees)
-//                self.presenter.employeeDidReceive(with: dataStore)
-//            }
-//            self.fileManager.createDirectory() // need to be removed
-            
-            
-            
-            
-            //        serverService.loadDataForCache { data in
-            //
-            //            self.fileManager.createDirectory()
-            //
-            //            self.decoder.decodeData(data) { employee in
-            //
-            //            }
-            //
-            //            self.fileUrl = self.fileManager.saveData(data)
-            
-//        }
-//    }
-//}
+    private func checkCache() -> Bool {
+        if fileManager.ifFileExists(self.urlStorage.getURLFromCache(self.urlStorage.key)) {  // <- Check if file with cache Exists
+           return true
+        } else { return false }
+    }
+    
+}

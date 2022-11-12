@@ -1,12 +1,12 @@
 import Foundation
 
 
-protocol ServerServiceProtocol {
+protocol APIControllerProtocol {
     func loadCachedData(_ fileUrl: URL?, completion: @escaping (_ data: Data)->())
     func loadDataFromServer(completion: @escaping (_ data: Data)->())
 }
 
-class ServerService: ServerServiceProtocol {
+class APIController: APIControllerProtocol {
     
     // MARK: - Private properties:
     private let employeeJson =  "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c"
@@ -37,10 +37,8 @@ class ServerService: ServerServiceProtocol {
                       "No error description. Cannot load Data from server.")
                 return }
             completion(data)
-            print("Data from loadNetwork is \(data)") // Needs to be deleted.
         } .resume()
     }
-    
 }
 
 

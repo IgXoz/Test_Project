@@ -11,17 +11,15 @@ class EmployeeCellViewModel: EmployeeCellViewModelProtocol {
     var cellIdentifier: String {
         "EmployeeCell"
     }
-    var cellHeight: Double { // лучше удалить
-        100
-    }
+
     var employeeName: String {
-        employee.name
+    "Name: \(employee.name)"
     }
     var employeePhoneNumber: String {
-        employee.phoneNumber
+        "Phone number: \(employee.phoneNumber)"
     }
     var employeeSkill: [String] {
-        employee.skills
+       employee.skills
     }
     private let employee: Employee
     

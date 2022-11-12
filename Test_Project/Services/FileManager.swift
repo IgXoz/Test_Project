@@ -2,10 +2,10 @@ import Foundation
 
 // MARK: CacheManagerProtocol:
 protocol CacheManagerProtocol {
-    func fetchCacheData()
-    func createDirectory()
-    func saveData(_ data: Data) -> (URL)
+    func createFile()-> (URL?)
+    func saveData(_ data: Data, _ fileURL: URL?)
     func deleteData(_ fileURL: URL)
+    func ifFileExists(_ fileURL: URL?) -> Bool
 }
 
 // MARK: CacheManager:
@@ -13,33 +13,31 @@ class CacheManager: CacheManagerProtocol {
     
     // MARK: Private properties:
     private let manager = FileManager.default
-    private var folderUrl: URL!
-
+    private var fileUrl: URL!
     
     // MARK: CacheManagerProtocol methods:
-    func fetchCacheData() { // Need to be deleted
-        
-    }
     
-    // Changing folderURL
-    func createDirectory() { // Need to check if Directory exists before trying to create it
+    // Creates file
+    func createFile()-> (URL?) {
         guard let url = manager.urls(for: .documentDirectory,
-                                     in: .userDomainMask).first else { return }
-        self.folderUrl = url.appendingPathComponent("EmployeeData")
+                                     in: .userDomainMask).first else { return nil}
+        let folderUrl = url.appendingPathComponent("EmployeeData")
         print("Folder URL is \(folderUrl.path)")
+        
+        let fileURL = folderUrl.appendingPathComponent("employeeData.JSON")
+        self.fileUrl = fileURL
+        print("File URL is!! \(fileUrl)") // delete
+        return fileURL
     }
     
     //Saves Data and returns URL adress for cache-file.
-    func saveData(_ data: Data) -> (URL) {
-        createDirectory() // perhaps, needs to be deleted
-         let fileUrl = folderUrl.appendingPathComponent("employeeData.JSON")
-            manager.createFile(atPath: fileUrl.path, contents: nil, attributes: [FileAttributeKey.creationDate: Date()])
-            return fileUrl
+    func saveData(_ data: Data, _ fileURL: URL?) {
+        manager.createFile(atPath: fileUrl.path, contents: nil, attributes: [FileAttributeKey.creationDate: Date()])
     }
     
-    // Checks if file exists and removes file.
+    //  Removes file.
     func deleteData(_ fileURL: URL) {
-        if manager.fileExists(atPath: fileURL.path) {
+        if ifFileExists(fileURL) {
             print("File exists")
             do {
                 try manager.removeItem(at: fileURL)
@@ -50,4 +48,16 @@ class CacheManager: CacheManagerProtocol {
         }
     }
     
+    // Checks if file exists.
+    func ifFileExists(_ fileURL: URL?) -> Bool {
+        if let url = fileURL {
+            if manager.fileExists(atPath: url.path) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
 }

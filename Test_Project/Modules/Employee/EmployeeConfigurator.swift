@@ -2,7 +2,7 @@ import Foundation
 
 class EmployeeConfigurator: EmployeeConfiguratorProtocol {
     
-    //Configures module.
+    //Configures module
     func configure(with viewController: EmployeeViewController) {
         let presenter = EmployeePresenter(view: viewController)
         let interactor = EmployeeInteractor(presenter: presenter)
