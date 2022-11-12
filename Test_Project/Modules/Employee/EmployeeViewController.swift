@@ -15,7 +15,12 @@ class EmployeeViewController: UITableViewController, EmployeeDisplayLogicProtoco
         }
     }
     
-    // MARK: Private Methods
+    func presentAlert() {
+        let alert = UIAlertController(title: "Error", message: "Check Internet Connection", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
     private func setUpConstraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -46,7 +51,8 @@ class EmployeeViewController: UITableViewController, EmployeeDisplayLogicProtoco
 extension EmployeeViewController {
 
    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sectionViewModel.rows.count
+       sectionViewModel.rows.count
+        
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

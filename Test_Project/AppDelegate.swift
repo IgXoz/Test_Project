@@ -10,8 +10,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         //    window?.rootViewController = UINavigationController(rootViewController: EmployeeViewController())
         window?.rootViewController = EmployeeViewController()
+        
+        NetworkMonitor.shared.startMonitoring()
+        
         return true
     }
+    
+    
+    
 }
 
     

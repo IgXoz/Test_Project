@@ -18,7 +18,7 @@ class EmployeePresenter: EmployeePresentationLogicProtocol {
     }
     
     // MARK: Methods:
-    func employeeDidReceive(with dataStore: EmployeeDataStore) {
+    func employeeDidReceive(with dataStore: EmployeeDataStore) { 
         self.dataStore = dataStore
         let section = EmployeeSectionViewModel()
         
@@ -32,6 +32,14 @@ class EmployeePresenter: EmployeePresentationLogicProtocol {
     
     func displayData() {
         interactor.loadData()
+    }
+    
+    
+    func showAlert() {
+        DispatchQueue.main.async {
+            self.view.presentAlert()
+        }
+        
     }
  
 }

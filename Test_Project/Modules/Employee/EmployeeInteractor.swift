@@ -6,6 +6,10 @@ class EmployeeInteractor: EmployeeBusinessLogicProtocol {
     
     // MARK: BusinesLogicData Methods:
     func loadData() {
+        let _ = Timer.scheduledTimer(withTimeInterval: TimeConstants.checkInterval, repeats: false) { timer in
+            self.observeNetwork()
+        }
+
         if checkCache() {
             fetchCachedData()
         } else {
@@ -76,9 +80,28 @@ extension EmployeeInteractor {
             self.fileManager.deleteData(self.urlStorage.getURLFromCache(self.urlStorage.key)) // calls deleteData method
             print("Interactor removed cache")
         }
-       }
+    }
+}
+    
+// MARK: Extension NetworkConnection Methods:
+extension EmployeeInteractor {
+    
+    // Adds Observer for network connectivity:
+    func observeNetwork() {
+        NotificationCenter.default.addObserver(self, selector: #selector(checkConnection), name: .connectivityStatus, object: nil)
+    }
+    
+    @objc private func checkConnection() {
+        if  NetworkMonitor.shared.isConnected {
+            presenter.showAlert()
+        } else {
+            print ("It works")
+        }
+    }
 }
 
-enum TimeConstants {
-    fileprivate static let hour: Double = 3600 // seconds
-        }
+// MARK: Enum with Time Consts:
+    enum TimeConstants {
+        fileprivate static let hour: Double = 3600
+        fileprivate static let checkInterval: Double = 3
+    }

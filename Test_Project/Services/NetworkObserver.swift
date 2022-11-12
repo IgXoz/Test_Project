@@ -46,5 +46,49 @@ final class NetworkMonitor {
     func stopMonitoring() {
         monitor.cancel()
     }
+    
+
+    
 }
 
+
+
+
+//extension NSNotification.Name {
+//    static let networkMonitorPathUpdated = NSNotification.Name("NWNetworkMonitorPathUpdated")
+//}
+//
+//extension NWPath {
+//    var isConnected: Bool {
+//        status != .unsatisfied
+//    }
+//}
+//
+//// где-нибудь в коде приложения:
+//let mySharedNetworkMonitor = NWPathMonitor(requiredInterfaceType: <...>)
+//mySharedNetworkMonitor.pathUpdateHandler = { _ in
+//    NotificationCenter.shared.post(name: .networkMonitorPathUpdated,
+//                                   object: mySharedNetworkMonitor)
+//  // ... и даже наплевать на retain-cycle, т.к. судя по статье
+//  // этот объект всё равно собирался жить вечно как static var shared = ...
+//}
+//
+//// Зачем нужна какая-то особая очередь для получения этих уведомлений,
+//// мне тоже не понятно. Всё равно реагировать на эти события в большинстве случаев придётся в UI.
+//mySharedNetworkMonitor.start(queue: .main)
+//
+//// Не представляю в какой момент и зачем кому-то захочется сделать stop.
+//// Но если очень хочется, то можно:
+//mySharedNetworkMonitor.stop()
+//
+//NotificationCenter.shared
+//  .addObserver(forName: .networkMonitorPathUpdated,
+//               object: mySharedNetworkMonitor,
+//               queue: .main) { note in
+//  // если монитор всегда один,
+//  // то можно читать прям из mySharedNetworkMonitor
+//  let monitor = note.object as! NWPathMonitor
+//
+//  // читаем прямо из NWPathMonitor, используя Network API на 100%
+//  print("connected:", monitor.currentPath.isConnected)
+//}
