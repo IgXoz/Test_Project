@@ -11,9 +11,6 @@ protocol EmployeePresentationLogicProtocol: AnyObject {
 }
 
 protocol EmployeeBusinessLogicProtocol: AnyObject {
-//    func fetchEmployeeInfo()
-//    func fetchNetworkData()
-//    func fetchCachedData()
     func loadData()
 }
 

@@ -4,7 +4,7 @@ import Foundation
 protocol CacheManagerProtocol {
     func createFile()-> (URL?)
     func saveData(_ data: Data, _ fileURL: URL?)
-    func deleteData(_ fileURL: URL)
+    func deleteData(_ fileURL: URL?)
     func ifFileExists(_ fileURL: URL?) -> Bool
 }
 
@@ -36,16 +36,18 @@ class CacheManager: CacheManagerProtocol {
     }
     
     //  Removes file.
-    func deleteData(_ fileURL: URL) {
+    func deleteData(_ fileURL: URL?) {
         if ifFileExists(fileURL) {
             print("File exists")
-            do {
-                try manager.removeItem(at: fileURL)
-                print("File removed successfully.")
-            } catch {
-                print(error)
+            if let url = fileURL {
+                do {
+                    try manager.removeItem(at: url)
+                    print("File removed successfully.")
+                } catch {
+                    print(error)
+                }
             }
-        }
+        } else { print ("File Not Exists") } // need to be removed
     }
     
     // Checks if file exists.
