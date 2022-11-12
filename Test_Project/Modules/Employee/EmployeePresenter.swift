@@ -21,7 +21,9 @@ class EmployeePresenter: EmployeePresentationLogicProtocol {
     func employeeDidReceive(with dataStore: EmployeeDataStore) {
         self.dataStore = dataStore
         let section = EmployeeSectionViewModel()
-        dataStore.employees.forEach { employee in
+        
+        let sortedEmployees = dataStore.employees.sorted(by: {$0.name < $1.name})
+        sortedEmployees.forEach { employee in
             let cellViewModel = EmployeeCellViewModel(employee: employee)
             section.rows.append(cellViewModel)
         }
