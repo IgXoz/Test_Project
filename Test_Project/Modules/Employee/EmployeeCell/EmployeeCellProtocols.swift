@@ -1,29 +1,20 @@
 import Foundation
 
+// MARK: EmployeeCellViewModelProtocol
 protocol EmployeeCellViewModelProtocol {
     var cellIdentifier: String { get }
-    var cellHeight: Double { get }
     var employeeName: String { get }
     var employeePhoneNumber: String { get }
     var employeeSkill: [String] { get }
     init(employee: Employee)
 }
 
+// MARK: EmployeeSectionViewModelProtocol
 protocol EmployeeSectionViewModelProtocol {
     var rows: [EmployeeCellViewModelProtocol] { get }
 }
 
+// MARK: CellModelRepresentable
 protocol CellModelRepresentable {
     var viewModel: EmployeeCellViewModelProtocol? { get }
 }
-
-// MARK: Протокол для identifier:
-//protocol ReusableIdentifier: AnyObject {
-//    static var reuseIdentifier: String { get }
-//}
-//
-//extension ReusableIdentifier {
-//    static var reuseIdentifier: String {
-//        return "\(self)"
-//    }
-//}

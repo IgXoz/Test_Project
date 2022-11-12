@@ -5,15 +5,15 @@ struct EmployeeDataStore {
     let employees: [Employee]
 }
 
-class EmployeePresenter: EmployeePresenterProtocol {
+class EmployeePresenter: EmployeePresentationLogicProtocol {
     
     // MARK: Properties:
     private var dataStore: EmployeeDataStore?
-    var router: EmployeeRouterProtocol! // скорее всего должен быть удален
-    weak var view: EmployeeViewProtocol!
-    var interactor: EmployeeInteractorProtocol!
+    var router: EmployeeRouterProtocol! // not required for one-screen app, can be removed.
+    weak var view: EmployeeDisplayLogicProtocol!
+    var interactor: EmployeeBusinessLogicProtocol!
     
-    required init(view: EmployeeViewProtocol) {
+    required init(view: EmployeeDisplayLogicProtocol) {
         self.view = view
     }
     
@@ -28,8 +28,8 @@ class EmployeePresenter: EmployeePresenterProtocol {
         view.reloadData(for: section)
     }
     
-    func viewDidLoad() {
-        interactor.fetchEmployeeInfo()
+    func displayData() {
+        interactor.loadData()
     }
  
 }

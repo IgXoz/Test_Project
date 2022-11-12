@@ -1,29 +1,26 @@
 import Foundation
 
-protocol EmployeeViewProtocol: AnyObject {
+protocol EmployeeDisplayLogicProtocol: AnyObject {
     func reloadData(for section: EmployeeSectionViewModel)
 }
 
-protocol EmployeePresenterProtocol: AnyObject {
+protocol EmployeePresentationLogicProtocol: AnyObject {
     var router: EmployeeRouterProtocol! { set get } // not required
     func employeeDidReceive(with dataStore: EmployeeDataStore)
-    func viewDidLoad()
-    
+    func displayData()
 }
 
-protocol EmployeeInteractorProtocol: AnyObject {
-    func fetchEmployeeInfo()
+protocol EmployeeBusinessLogicProtocol: AnyObject {
+//    func fetchEmployeeInfo()
+//    func fetchNetworkData()
+//    func fetchCachedData()
+    func loadData()
 }
 
 protocol EmployeeConfiguratorProtocol: AnyObject {
-    
     func configure(with viewController: EmployeeViewController)
-    
-    //внутри этого метода конфигурируется модуль
-    
 }
 
 protocol EmployeeRouterProtocol: AnyObject {
-// this protocol is not required for one screen app.
-
+// this protocol is not required for one screen app and may be removed.
 }
