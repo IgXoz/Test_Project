@@ -47,7 +47,7 @@ class CacheManager: CacheManagerProtocol {
                     print(error)
                 }
             }
-        } else { print ("File Not Exists") } // need to be removed
+        } else { print ("File Not Exists") } 
     }
     
     // Checks if file exists.

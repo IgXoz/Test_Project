@@ -11,7 +11,7 @@ class APIController: APIControllerProtocol {
     // MARK: - Private properties:
     private let employeeJson =  "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c"
     
-    // MARK: - ServerServiceProtocol methods:
+    // MARK: - APIControllerProtocol methods:
 
     //Loads Data from cache and returns Data.
     func loadCachedData(_ fileUrl: URL?, completion: @escaping (_ data: Data)->()) {
