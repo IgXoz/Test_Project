@@ -22,17 +22,15 @@ class CacheManager: CacheManagerProtocol {
         guard let url = manager.urls(for: .documentDirectory,
                                      in: .userDomainMask).first else { return nil}
         let folderUrl = url.appendingPathComponent("EmployeeData")
-        print("Folder URL is \(folderUrl.path)")
         
         let fileURL = folderUrl.appendingPathComponent("employeeData.JSON")
         self.fileUrl = fileURL
-        print("File URL is!! \(fileUrl)") // delete
         return fileURL
     }
     
     //Saves Data and returns URL adress for cache-file.
     func saveData(_ data: Data, _ fileURL: URL?) {
-        manager.createFile(atPath: fileUrl.path, contents: nil, attributes: [FileAttributeKey.creationDate: Date()])
+        manager.createFile(atPath: fileUrl.path, contents: data, attributes: [FileAttributeKey.creationDate: Date()])
     }
     
     //  Removes file.
